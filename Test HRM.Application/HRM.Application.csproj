@@ -7,4 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Leave\Dto\" />
+    <Folder Include="Leave\Filter\" />
+    <Folder Include="Leave\Spec\" />
+    <Folder Include="Leave\Service\" />
+  </ItemGroup>
+
 </Project>
