@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Test HRM.Application\HRM.Application.csproj" />
+    <ProjectReference Include="..\Test HRM.Persistence\HRM.Persistence.csproj" />
+    <ProjectReference Include="..\Test HRM.Shared\HRM.Shared.csproj" />
   </ItemGroup>
 
 </Project>

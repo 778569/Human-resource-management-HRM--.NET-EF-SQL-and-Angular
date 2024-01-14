@@ -7,4 +7,22 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="LeaveType\Filter\" />
+    <Folder Include="LeaveType\Spec\" />
+    <Folder Include="Leave\Dto\" />
+    <Folder Include="Leave\Filter\" />
+    <Folder Include="Leave\Spec\" />
+    <Folder Include="Leave\Service\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TestHRM.Domin\HRM.Domin.csproj" />
+  </ItemGroup>
+
 </Project>
