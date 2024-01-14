@@ -8,5 +8,6 @@ namespace Test_HRM.Application.Leave.Interface
 {
     public interface ILeaveService
     {
+        //Task<IReadOnlyList<HRM.Domin.Entities.LeaveType.LeaveType>> GetList();
     }
 }

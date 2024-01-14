@@ -14,9 +14,8 @@ namespace HRM.Domin.Entities.Leave
         public string? CreatedBy { get ; set; }
         public DateTimeOffset? UpdatedOn { get; set; }
         public string? UpdatedBy { get; set; }
-        public DateTimeOffset? DeletedOn { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string DeletedBy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public bool IsDeleted => throw new NotImplementedException();
+        public DateTimeOffset? DeletedOn { get; set; }
+        public string DeletedBy { get; set; }
+        public bool IsDeleted { get; }
     }
 }
