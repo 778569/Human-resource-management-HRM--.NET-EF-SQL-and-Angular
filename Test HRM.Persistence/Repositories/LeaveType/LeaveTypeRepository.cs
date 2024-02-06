@@ -14,13 +14,11 @@ namespace Test_HRM.Persistence.Repositories.LeaveType
 {
     public class LeaveTypeRepository : BaseRepository , ILeaveTypeRepository
     {
-        private readonly DbSet<HRM.Domin.Entities.LeaveType.LeaveType> _leaveTypeTable;
+        private readonly HRMDBContext _hRMDBContext;
 
         public LeaveTypeRepository(HRMDBContext hRMDBContext) : base(hRMDBContext)
         {
-
-            _leaveTypeTable = hRMDBContext.Set<HRM.Domin.Entities.LeaveType.LeaveType>();
-
+            _hRMDBContext = hRMDBContext;
         }
 
        
@@ -76,7 +74,7 @@ namespace Test_HRM.Persistence.Repositories.LeaveType
         public async Task<(IReadOnlyList<HRM.Domin.Entities.LeaveType.LeaveType> list, int totalRecocrds)> GetListBySpec(Paginator paginator, ISpecification<HRM.Domin.Entities.LeaveType.LeaveType> specification, CancellationToken token)
         {
             {
-                var query = _leaveTypeTable.WithSpecification(specification);
+                var query = _hRMDBContext.LeaveType.WithSpecification(specification);
 
                 var totalRecords = await query.CountAsync(cancellationToken: token);
 
@@ -89,5 +87,43 @@ namespace Test_HRM.Persistence.Repositories.LeaveType
             }
 
         }
+
+
+        public async Task<HRM.Domin.Entities.LeaveType.LeaveType> GetByIdSpec(ISpecification<HRM.Domin.Entities.LeaveType.LeaveType> specification , CancellationToken token, bool asTracking = false)
+        {
+            var query = asTracking ? _hRMDBContext.LeaveType.AsTracking() : _hRMDBContext.LeaveType;
+
+            var entity = await query.WithSpecification(specification).FirstOrDefaultAsync(cancellationToken: token);
+
+            return entity;
+
+        }
+
+        public async Task<HRM.Domin.Entities.LeaveType.LeaveType> GetByNameSpec(ISpecification<HRM.Domin.Entities.LeaveType.LeaveType> specification, CancellationToken token, bool asTracking = false)
+        {
+            var query = asTracking ? _hRMDBContext.LeaveType.AsTracking() : _hRMDBContext.LeaveType;
+
+            var entity = await query.WithSpecification(specification).FirstOrDefaultAsync(cancellationToken: token);
+
+            return entity;
+        }
+
+        public HRM.Domin.Entities.LeaveType.LeaveType Add(HRM.Domin.Entities.LeaveType.LeaveType leaveTypeItem)
+        {
+            _hRMDBContext.LeaveType.Add(leaveTypeItem);
+            //_hRMDBContext.SaveChanges();
+            return leaveTypeItem;
+        }
+
+        public async Task<HRM.Domin.Entities.LeaveType.LeaveType?> GetById(Guid id, CancellationToken token, bool asTracking = false)
+        {
+            var query = asTracking ? _hRMDBContext.LeaveType.AsTracking() : _hRMDBContext.LeaveType;
+
+            var entity = await query.FirstOrDefaultAsync(f => f.Id == id, cancellationToken: token);
+
+            return entity;
+        }
+
+
     }
 }

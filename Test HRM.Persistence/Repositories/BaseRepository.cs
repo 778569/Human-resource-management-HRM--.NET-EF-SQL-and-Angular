@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Test_HRM.Application.PersisteanceInterfaces;
 
 namespace Test_HRM.Persistence.Repositories
 {
-    public abstract class BaseRepository
+    public abstract class BaseRepository : IBaseRepository
     {
         private readonly HRMDBContext _dBContext;
 

@@ -11,7 +11,7 @@ namespace Test_HRM.Persistence
     public class HRMDBContext :DbContext
     {
 
-        //public DbSet<LeaveType> Leavetype { get; set; }
+        public DbSet<LeaveType> LeaveType { get; set; }
 
         // public SampleDbContext(DbContextOptions<HRMDBContext> options)
         //: base(options)
