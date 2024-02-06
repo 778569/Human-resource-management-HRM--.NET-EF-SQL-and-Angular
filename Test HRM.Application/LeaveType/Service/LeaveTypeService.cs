@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HRM.Shared.Exceptions;
 using HRM.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,22 @@ namespace Test_HRM.Application.LeaveType.Service
         //}
 
 
+
+        public async Task<ResponseResult<LeaveTypeDto>> GetById(Guid id, CancellationToken token)
+        {
+
+            var leavetypeItem = await _leaveTypeRepository.GetByIdSpec(new LeaveTypeByIdSpec(id),token);
+
+            if (leavetypeItem is null) return new ResponseResult<LeaveTypeDto>(new NotFoundException(nameof(id), nameof(HRM.Domin.Entities.LeaveType.LeaveType), id));
+
+            var todoItemDto = _mapper.Map<LeaveTypeDto>(leavetypeItem);
+
+            return new ResponseResult<LeaveTypeDto>(todoItemDto);
+
+        }
+
+
+
         public async Task<ResponseResult<IReadOnlyList<LeaveTypeDto>>> GetList(Paginator paginator, LeaveTypeFilter filter, CancellationToken token)
         {
             var (list, totalRecords) = await _leaveTypeRepository.GetListBySpec(paginator, new LeaveTypeFilterSpec(filter), token);
@@ -60,6 +77,66 @@ namespace Test_HRM.Application.LeaveType.Service
 
             return new ResponseResult<IReadOnlyList<LeaveTypeDto>>(leaveTypeItemDtoList, totalRecords);
         }
+
+
+
+
+
+        public async Task<ResponseResult<LeaveTypeDto>> Add(CreateLeaveTypeDto model, CancellationToken token)
+        {
+            var leavetype = await _leaveTypeRepository.GetByNameSpec(new LeaveTypeByNameSpec(model.Name), token);
+
+            if (leavetype is not null) return new ResponseResult<LeaveTypeDto>(new RecordAlreadyExistException(nameof (HRM.Domin.Entities.LeaveType.LeaveType), model.Name, leavetype.Id));
+
+            var leaveTypeToCreate = _mapper.Map<HRM.Domin.Entities.LeaveType.LeaveType>(model);
+
+            var createLeaveType = _leaveTypeRepository.Add(leaveTypeToCreate);
+
+            await _leaveTypeRepository.SaveChangesAsync(token);
+
+            var createdLeaveTypeDto = _mapper.Map<LeaveTypeDto>(createLeaveType);
+
+            return new ResponseResult<LeaveTypeDto>(createdLeaveTypeDto);
+        }   
+
+
+        public async Task<ResponseResult> Update(Guid id, UpdateLeaveTypeDto model, CancellationToken token)
+        {
+
+            var leavetype = await _leaveTypeRepository.GetById(id, asTracking: true, token : token);
+
+            var selectedLeaveType = await _leaveTypeRepository.GetByNameSpec(new LeaveTypeByNameAndIdSpec(model.Name, id), token, asTracking: false);
+
+            if (selectedLeaveType is not null) return new ResponseResult(new RecordAlreadyExistException(nameof(model.Name), nameof(HRM.Domin.Entities.LeaveType.LeaveType), model.Name));
+
+            _mapper.Map(model, leavetype);
+
+            await _leaveTypeRepository.SaveChangesAsync(token);
+
+            return new ResponseResult();
+
+        }
+
+
+       
+        public async Task<ResponseResult> Delete(Guid id, CancellationToken token)
+        {
+            var leavetype = await _leaveTypeRepository.GetById(id, asTracking: true, token: token);
+
+            if (leavetype is null) return new ResponseResult(new NotFoundException(nameof(id), nameof(HRM.Domin.Entities.LeaveType.LeaveType), id));
+
+            leavetype.Delete();
+
+            await _leaveTypeRepository.SaveChangesAsync(token);
+
+            return new ResponseResult();
+        }
+
+
+
+
+
+
 
 
 
