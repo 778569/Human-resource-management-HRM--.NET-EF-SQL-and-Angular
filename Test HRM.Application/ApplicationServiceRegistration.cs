@@ -9,6 +9,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Test_HRM.Application.LeaveAct.Interfaces;
+using Test_HRM.Application.LeaveAct.Services;
 using Test_HRM.Application.LeaveType.Interfaces;
 using Test_HRM.Application.LeaveType.Service;
 using Test_HRM.Application.MappingProfile;
@@ -33,6 +35,8 @@ namespace Test_HRM.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.TryAddScoped< ILeaveTypeService, LeaveTypeService>();
+
+            services.TryAddScoped<ILeaveActService, LeaveActService>();
 
             return services;
 
