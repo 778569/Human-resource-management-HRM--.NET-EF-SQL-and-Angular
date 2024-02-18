@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Test_HRM.Application.LeaveAct.Interfaces;
+using Test_HRM.Shared.Responses;
 
 namespace Test_HRM.Persistence.Repositories.LeaveAct
 {
@@ -37,6 +38,34 @@ namespace Test_HRM.Persistence.Repositories.LeaveAct
             var entity = await query.Skip((paginator.PageNumber - 1) * paginator.PageSize).Take(paginator.PageSize).ToListAsync(cancellationToken : token);
 
             return (entity,total);
+        }
+
+        public async Task<HRM.Domin.Entities.LeaveAct.LeaveAct> GetByIdSpec(ISpecification<HRM.Domin.Entities.LeaveAct.LeaveAct> specification, CancellationToken token, bool asTracking = false)
+        {
+            var query = asTracking ? _hRMDBContext.LeaveAct.AsTracking() : _hRMDBContext.LeaveAct;
+
+            var entity = await query.WithSpecification(specification).FirstOrDefaultAsync(cancellationToken: token);
+
+            return entity;
+        }
+
+        public async Task<HRM.Domin.Entities.LeaveAct.LeaveAct> GetById(Guid id, CancellationToken token, bool asTracking = false)
+        {
+            var query = asTracking ? _hRMDBContext.LeaveAct.AsTracking() : _hRMDBContext.LeaveAct; 
+            
+            var entity = await _hRMDBContext.LeaveAct.FirstOrDefaultAsync(x => x.Id == id, cancellationToken: token);
+
+            return entity;
+        }
+
+
+        public async Task<HRM.Domin.Entities.LeaveAct.LeaveAct?> GetByNameSpec(ISpecification<HRM.Domin.Entities.LeaveAct.LeaveAct> specification, CancellationToken token , bool asTracking = false )
+        {
+            var querry = asTracking ? _hRMDBContext.LeaveAct.AsTracking() : _hRMDBContext.LeaveAct;
+
+            var entity = await querry.WithSpecification(specification).FirstOrDefaultAsync(cancellationToken: token);
+
+            return entity;
         }
     }
 }

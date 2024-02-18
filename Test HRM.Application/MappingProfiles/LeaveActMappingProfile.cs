@@ -16,6 +16,7 @@ namespace Test_HRM.Application.MappingProfiles
             CreateMap<HRM.Domin.Entities.LeaveAct.LeaveAct, LeaveActDto>().ReverseMap();
 
             CreateMap<HRM.Domin.Entities.LeaveAct.LeaveAct, CreateLeaveActDto>().ReverseMap();
+            CreateMap<HRM.Domin.Entities.LeaveAct.LeaveAct, UpdateLeaveTyepDto>().ReverseMap();
         }
     }
 }

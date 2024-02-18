@@ -16,5 +16,11 @@ namespace Test_HRM.Application.LeaveAct.Interfaces
         Task<ResponseResult<LeaveActDto>> Add(CreateLeaveActDto model, CancellationToken token);
 
         Task<ResponseResult<IReadOnlyList<LeaveActDto>>> GetList(Paginator paginator, LeaveActFilter model, CancellationToken token);
+
+        Task<ResponseResult<LeaveActDto>> GetById(Guid id, CancellationToken token);
+
+        Task<ResponseResult> Update(Guid id, UpdateLeaveTyepDto model, CancellationToken token);
+
+        Task<ResponseResult> Delete(Guid id, CancellationToken token);
     }
 }
