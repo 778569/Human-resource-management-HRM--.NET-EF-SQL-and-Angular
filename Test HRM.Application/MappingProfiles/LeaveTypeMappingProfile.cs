@@ -14,7 +14,7 @@ namespace Test_HRM.Application.MappingProfile
 
         public LeaveTypeMappingProfile()
         {
-            CreateMap<HRM.Domin.Entities.LeaveType.LeaveType, LeaveTypeDto>().ReverseMap(); ;
+            CreateMap<HRM.Domin.Entities.LeaveType.LeaveType, LeaveTypeDto>().ReverseMap(); 
 
             CreateMap<HRM.Domin.Entities.LeaveType.LeaveType, CreateLeaveTypeDto>().ReverseMap();
 

@@ -1,4 +1,5 @@
-﻿using HRM.Domin.Entities.LeaveType;
+﻿using HRM.Domin.Entities.LeaveAct;
+using HRM.Domin.Entities.LeaveType;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Test_HRM.Persistence
     {
 
         public DbSet<LeaveType> LeaveType { get; set; }
+
+        public DbSet<LeaveAct> LeaveAct { get; set; }
 
         // public SampleDbContext(DbContextOptions<HRMDBContext> options)
         //: base(options)

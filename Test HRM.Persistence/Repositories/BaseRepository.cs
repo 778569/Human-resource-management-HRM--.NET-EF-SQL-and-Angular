@@ -7,7 +7,7 @@ using Test_HRM.Application.PersisteanceInterfaces;
 
 namespace Test_HRM.Persistence.Repositories
 {
-    public abstract class BaseRepository : IBaseRepository
+    public abstract class BaseRepository 
     {
         private readonly HRMDBContext _dBContext;
 
