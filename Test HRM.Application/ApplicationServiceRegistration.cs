@@ -9,6 +9,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Test_HRM.Application.Designation.Interface;
+using Test_HRM.Application.Designation.Service;
 using Test_HRM.Application.LeaveAct.Interfaces;
 using Test_HRM.Application.LeaveAct.Services;
 using Test_HRM.Application.LeaveType.Interfaces;
@@ -37,6 +39,12 @@ namespace Test_HRM.Application
             services.TryAddScoped< ILeaveTypeService, LeaveTypeService>();
 
             services.TryAddScoped<ILeaveActService, LeaveActService>();
+
+            services.TryAddScoped<IDesingationService, DesignationService>();
+
+
+
+
 
             return services;
 

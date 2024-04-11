@@ -10,6 +10,8 @@ using Test_HRM.Persistence.Repositories.LeaveType;
 using Test_HRM.Application.LeaveType.Interfaces;
 using Test_HRM.Application.LeaveAct.Interfaces;
 using Test_HRM.Persistence.Repositories.LeaveAct;
+using Test_HRM.Application.Designation.Interface;
+using Test_HRM.Persistence.Repositories.Designation;
 //using Test_HRM.Persistence.Repositories.LeaveType;
 
 namespace Test_HRM.Persistence
@@ -26,6 +28,11 @@ namespace Test_HRM.Persistence
             //Leave Act
 
             services.TryAddScoped<ILeaveActRepository, LeaveActRepository>();
+
+
+            //Designation
+
+            services.TryAddScoped<IDesignationRepository, DesignationRepository>();
 
             return services;
 
