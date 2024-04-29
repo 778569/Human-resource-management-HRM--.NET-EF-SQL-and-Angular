@@ -1,4 +1,5 @@
-﻿using HRM.Domin.Entities.Designation;
+﻿using HRM.Domin.Entities.Department;
+using HRM.Domin.Entities.Designation;
 using HRM.Domin.Entities.LeaveAct;
 using HRM.Domin.Entities.LeaveType;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,10 @@ namespace Test_HRM.Persistence
         public DbSet<LeaveAct> LeaveAct { get; set; }
 
         public DbSet<Designation> Designation { get; set; }
+
+        public DbSet<Department> Department { get; set; }
+
+        public DbSet<SubDepartment> SubDepartment { get; set; }
 
 
 
